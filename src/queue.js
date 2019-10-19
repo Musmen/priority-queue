@@ -4,36 +4,24 @@ class PriorityQueue {
 	constructor(maxSize) {
 		this.heap = new MaxHeap;
 		this.maxSize = maxSize || 30;
-		this.length = 0; // ***
-		this.queue = [];
 	}
 
 	push(data, priority) {
-		if (this.length == this.maxSize) throw new Error('');
-
-		var node = new Node(data, priority);
-		this.length++;
-		this.queue.push(node);
-
-		var heap = new MaxHeap();
-		heap.push(data, priority);
+		if (this.size() >= this.maxSize) throw new Error('You already reached max size of queue!');
+		this.heap.push(data, priority);
 	}
 
 	shift() {
-		if (this.length === 0) throw new Error('');
-		this.queue.shift(node);
-
-		this.length--;
-		var heap = new MaxHeap();
-		heap.pop();
+		if (this.isEmpty()) throw new Error('Queue is already empty!');
+		return this.heap.pop();
 	}
 
 	size() {
-		return this.length;
+		return this.heap.size();
 	}
 
 	isEmpty() {
-		return true;
+		return this.heap.isEmpty();
 	}
 }
 
